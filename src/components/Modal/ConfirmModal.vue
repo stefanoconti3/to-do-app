@@ -11,18 +11,22 @@
       <p class="confirm-title color-red">
         {{ title }}
       </p>
-      <button
-        class="btn btn-blue"
-        @click="onButtonClick"
-      >
-        {{ button }}
-      </button>
-      <button
-        class="btn btn-red mr-3"
-        @click="onCancelButtonClick"
-      >
-        Cancel
-      </button>
+      <div class="d-flex justify-content-around">
+        <b-button
+          variant="danger"
+          size="lg"
+          @click="onButtonClick"
+        >
+          {{ button }}
+        </b-button>
+        <b-button
+          variant="primary"
+          size="lg"
+          @click="onCancelButtonClick"
+        >
+          Cancel
+        </b-button>
+      </div>
     </div>
   </b-modal>
 </template>

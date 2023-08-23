@@ -1,18 +1,18 @@
 <template>
   <b-modal
-      ref="modal-create-task"
-      hide-footer
-      hide-header
-      size="lg"
-      modal-class="modal-create-task"
-      centered
-      v-model="showModal"
+    ref="modal-create-task"
+    hide-footer
+    hide-header
+    size="lg"
+    modal-class="modal-create-task"
+    centered
+    v-model="showModal"
   >
-    <h3 class="text-left font-weight-bold">
+    <h3 class="text-left font-weight-bold pt-3">
       Create Task
     </h3>
-    <div>
-      <p class="mb-0">Task Name:</p>
+    <div class="mb-3">
+      <p class="font-size-20 mb-2">Task Name:</p>
       <b-form-input
         name="task"
         required
@@ -25,6 +25,7 @@
     </div>
     <b-form-checkbox
       id="checkbox-1"
+      class="font-size-18"
       v-model="model.mark"
       name="checkbox-1"
       :value="true"
@@ -32,18 +33,14 @@
     >
       I mark task as complete
     </b-form-checkbox>
-    <b-button
-      variant="primary"
-      @click="createTask"
-    >
-      Create
-    </b-button>
-    <b-button
-        variant="danger"
-        @click="() => {this.showModal = false}"
-    >
-      Cancel
-    </b-button>
+    <div class="d-flex justify-content-around mt-5">
+      <b-button variant="primary" size="lg" @click="createTask">
+        Create
+      </b-button>
+      <b-button variant="danger" size="lg" @click="() => {this.showModal = false}">
+        Cancel
+      </b-button>
+    </div>
   </b-modal>
 </template>
 

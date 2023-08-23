@@ -1,6 +1,10 @@
 <template>
-  <div class="container">
-    <b-button variant="primary" @click="showCreateTaskModal">Create Task</b-button>
+  <div class="container mt-5">
+    <h1 class="text-center font-weight-bold">To Do App</h1>
+    <div class="d-flex justify-content-between mt-5 mb-3">
+      <h2>Task List</h2>
+      <b-button variant="danger" @click="showCreateTaskModal">Create Task</b-button>
+    </div>
     <task-list :rows="tasks" @delete="deleteTask" @complete="completeTask" />
     <create-task-modal
       :modal-open.sync="showModal"
@@ -43,6 +47,7 @@ export default {
           createdAt: new Date()
         }
       );
+      this.showModal = false;
     },
     async deleteTask(id) {
       await store.dispatch("task/deleteTask", { id });
@@ -51,6 +56,17 @@ export default {
     async completeTask(id) {
       await store.dispatch("task/completeTask", { id });
       this.tasks = this.$store.state.task.tasks;
+    }
+  },
+  watch: {
+    showModal(v) {
+      if (v) {
+        this.model = {
+          _id: "",
+          name: "",
+          mark: false
+        }
+      }
     }
   }
 };

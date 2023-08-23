@@ -1,15 +1,15 @@
 <template>
   <div>
     <vue-good-table
-        mode="remote"
-        :rows="rows"
-        :columns="columns"
-        :sort-options="{ enabled: false }"
-        :pagination-options="{
-      enabled: true,
-      mode: 'records'
-    }"
-        styleClass="custom-table"
+      mode="remote"
+      :rows="rows"
+      :columns="columns"
+      :sort-options="{ enabled: false }"
+      :pagination-options="{
+        enabled: true,
+        mode: 'records'
+      }"
+      styleClass="custom-table"
     >
       <template slot="table-column" slot-scope="props">
       <span v-if="props.column.label">
@@ -17,13 +17,13 @@
       </span>
       </template>
       <template slot="table-row" slot-scope="props">
-      <span v-if="props.column.field === 'createdAt'">
-        {{ new Date(props.row.createdAt).toLocaleDateString() }}
-      </span>
+        <span v-if="props.column.field === 'createdAt'">
+          {{ new Date(props.row.createdAt).toLocaleDateString() }}
+        </span>
         <span v-else-if="props.column.field === 'mark'">
-        <b-badge v-if="props.row.mark" pill variant="success">Completed</b-badge>
-      </span>
-        <div v-else-if="props.column.field === 'action'" class="d-flex align-items-center">
+          <b-badge v-if="props.row.mark" pill variant="success" class="font-size-18">Completed</b-badge>
+        </span>
+        <div v-else-if="props.column.field === 'action'" class="d-flex align-items-center justify-content-center">
           <delete-icon class="color-red" @click="showDeleteTaskConfirmModal(props.row.id)"/>
           <b-dropdown
             v-if="!props.row.mark"
@@ -56,7 +56,6 @@
 </template>
 
 <script>
-
 import ConfirmModal from "@/components/Modal/ConfirmModal.vue";
 
 export default {
@@ -91,10 +90,17 @@ export default {
       selectedId: "",
       title: "",
       buttonTitle: "",
-      mode: ""
+      mode: "",
+      isMobile: false
     };
   },
+  mounted() {
+    window.addEventListener("resize", this.onResize);
+  },
   methods: {
+    onResize() {
+      this.isMobile = window.innerWidth < 768;
+    },
     showDeleteTaskConfirmModal(id) {
       this.title = "Are you sure you want to delete this task?";
       this.buttonTitle = "Delete Task"
@@ -115,6 +121,7 @@ export default {
       } else {
         this.$emit("complete", this.selectedId)
       }
+      this.showModal = false;
     }
   },
   watch: {

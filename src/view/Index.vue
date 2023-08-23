@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <b-button variant="primary" @click="showCreateTaskModal">Create Task</b-button>
-    <task-list :rows="tasks" />
+    <task-list :rows="tasks" @delete="deleteTask" @complete="completeTask" />
     <create-task-modal
       :modal-open.sync="showModal"
       :model="model"
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import CreateTaskModal from "@/components/CreateTaskModal.vue";
+import CreateTaskModal from "@/components/Modal/CreateTaskModal.vue";
 import { v4 as uuidV4 } from 'uuid';
 import store from "@/store";
 import TaskList from "@/components/TaskList.vue";
@@ -43,7 +43,14 @@ export default {
           createdAt: new Date()
         }
       );
-      console.log(this.tasks)
+    },
+    async deleteTask(id) {
+      await store.dispatch("task/deleteTask", { id });
+      this.tasks = this.$store.state.task.tasks;
+    },
+    async completeTask(id) {
+      await store.dispatch("task/completeTask", { id });
+      this.tasks = this.$store.state.task.tasks;
     }
   }
 };

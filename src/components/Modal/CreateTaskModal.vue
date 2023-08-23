@@ -33,8 +33,8 @@
       I mark task as complete
     </b-form-checkbox>
     <b-button
-        variant="primary"
-        @click="createTask"
+      variant="primary"
+      @click="createTask"
     >
       Create
     </b-button>

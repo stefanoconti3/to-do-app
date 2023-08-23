@@ -4,7 +4,11 @@
     :rows="rows"
     :columns="columns"
     :sort-options="{ enabled: false }"
-    :pagination-options="{ enable: true }"
+    :pagination-options="{
+      enabled: true,
+      mode: 'records'
+    }"
+    styleClass="custom-table"
   >
     <template slot="table-column" slot-scope="props">
       <span v-if="props.column.label">
@@ -18,6 +22,19 @@
       <span v-else-if="props.column.field === 'mark'">
         <b-badge v-if="props.row.mark" pill variant="success">Completed</b-badge>
       </span>
+      <div v-else-if="props.column.field === 'actions'" class="d-flex">
+        <b-dropdown
+          variant="link"
+          toggle-class="text-decoration-none"
+          no-caret
+          offset="0"
+          class="icon-dropdown"
+        >
+          <template v-slot:button-content>
+            <action-icon />
+          </template>
+        </b-dropdown>
+      </div>
     </template>
     <div slot="emptystate" class="empty-state">
       Currently, there is no data available for this list.

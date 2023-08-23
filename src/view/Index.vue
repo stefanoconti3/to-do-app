@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <b-button variant="primary" @click="showCreateTaskModal">Create Task</b-button>
     <task-list :rows="tasks" />
     <create-task-modal

@@ -3,7 +3,7 @@
     <vue-good-table
       mode="remote"
       :rows="rows"
-      :columns="columns"
+      :columns="tableColumns"
       :sort-options="{ enabled: false }"
       :pagination-options="{
         enabled: true,
@@ -86,6 +86,20 @@ export default {
           field: "action"
         }
       ],
+      mobileColumns: [
+        {
+          label: "Task",
+          field: "name"
+        },
+        {
+          label: "Mark",
+          field: "mark"
+        },
+        {
+          label: "Action",
+          field: "action"
+        }
+      ],
       showModal: false,
       selectedId: "",
       title: "",
@@ -93,6 +107,13 @@ export default {
       mode: "",
       isMobile: false
     };
+  },
+  computed: {
+    tableColumns() {
+      return this.isMobile
+          ? [...this.mobileColumns]
+          : [...this.columns];
+    },
   },
   mounted() {
     window.addEventListener("resize", this.onResize);

@@ -58,7 +58,7 @@
   th {
     position: relative;
     padding: 0.75em 1.5em 0.75em 0.75em;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #606266;
     background: linear-gradient(#f4f5f8,#f1f3f6);
@@ -105,6 +105,7 @@
   border-bottom-right-radius: 4px;
   background: #f5f7fb;
   line-height: 40px;
+  padding: 0.75em 1.5em 0.75em 0.75em;
 
   .footer__navigation__page-btn {
     .chevron.right::after {

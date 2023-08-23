@@ -17,7 +17,7 @@
         name="task"
         required
         class="p-3"
-        v-model="model.task"
+        v-model="model.name"
       />
       <b-form-invalid-feedback v-if="error" class="d-block">
         This field is required.
@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     createTask() {
-      if (!this.model.task) {
+      if (!this.model.name) {
         this.error = true;
       } else {
         this.error = false;

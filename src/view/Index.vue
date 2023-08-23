@@ -4,6 +4,7 @@
     <create-task-modal
       :modal-open.sync="showModal"
       :model="model"
+      @create="createTask"
     />
   </div>
 </template>
@@ -11,6 +12,8 @@
 <script>
 
 import CreateTaskModal from "@/components/CreateTaskModal.vue";
+import { v4 as uuidV4 } from 'uuid';
+import store from "@/store";
 
 export default {
   name: "Home",
@@ -27,6 +30,9 @@ export default {
   methods: {
     showCreateTaskModal() {
       this.showModal = true;
+    },
+    async createTask() {
+      await store.dispatch("task/createTask", {...this.model, id: uuidV4() });
     }
   }
 };

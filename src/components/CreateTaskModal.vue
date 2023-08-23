@@ -19,6 +19,9 @@
         class="p-3"
         v-model="model.task"
       />
+      <b-form-invalid-feedback v-if="error" class="d-block">
+        This field is required.
+      </b-form-invalid-feedback>
     </div>
     <b-form-checkbox
       id="checkbox-1"
@@ -67,9 +70,19 @@ export default {
       },
     },
   },
+  data() {
+    return {
+      error: false
+    };
+  },
   methods: {
     createTask() {
-      this.$emit("create");
+      if (!this.model.task) {
+        this.error = true;
+      } else {
+        this.error = false;
+        this.$emit("create");
+      }
     }
   },
 };
